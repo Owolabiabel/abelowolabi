@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Abel Owolabi | Superconducting Logic & VLSI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Personal website of Abel Owolabi — Ph.D. student in Electrical and Computer Engineering at the University of Rochester, focusing on superconducting logic, DSFQ/RSFQ circuits, and beyond-CMOS VLSI."
+  />
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-soft: #020617;
+      --accent: #6366f1;
+      --accent-soft: rgba(99, 102, 241, 0.12);
+      --accent-2: #22c55e;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --card: #020617;
+      --border: rgba(148, 163, 184, 0.35);
+      --radius-xl: 1.5rem;
+      --radius-md: 0.75rem;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.85);
+      --transition: 180ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* HEADER / NAV */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(2, 6, 23, 0.96),
+        rgba(2, 6, 23, 0.75),
+        transparent
+      );
+      border-bottom: 1px solid rgba(30, 64, 175, 0.6);
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.86rem;
+    }
+
+    .logo-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 20%, #f97316, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      box-shadow: 0 0 22px rgba(129, 140, 248, 0.8);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.4rem;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      padding: 0.2rem 0.4rem;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: background var(--transition), color var(--transition),
+        transform var(--transition);
+    }
+
+    nav a:hover {
+      background: rgba(148, 163, 184, 0.14);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* LAYOUT */
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.75rem 1.5rem 3rem;
+    }
+
+    section {
+      margin-top: 3.2rem;
+    }
+
+    /* HERO */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.18rem 0.7rem;
+      font-size: 0.75rem;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: var(--muted);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-2);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2.3rem;
+      align-items: center;
+      margin-top: 2.2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.3rem, 4vw, 3.1rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-top: 0.9rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #6366f1, #22c55e, #eab308);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      margin-top: 0.7rem;
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 32rem;
+    }
+
+    .hero-sub strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .hero-buttons {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 0.6rem 1.35rem;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform var(--transition), box-shadow var(--transition),
+        background var(--transition), color var(--transition);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      box-shadow: 0 14px 35px rgba(79, 70, 229, 0.8);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) translateX(1px);
+      box-shadow: 0 18px 42px rgba(79, 70, 229, 0.9);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.98);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      margin-top: 1.7rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .hero-meta span strong {
+      color: #e5e7eb;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      padding: 1.6rem 1.4rem;
+      background: radial-gradient(circle at top left, #0b1120, #020617);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -90%;
+      background:
+        radial-gradient(circle at top, rgba(129, 140, 248, 0.26), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(52, 211, 153, 0.18), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero-avatar {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      border-radius: 1.9rem;
+      background: radial-gradient(circle at 20% 20%, #6366f1, #0ea5e9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 2.3rem;
+      color: #e5e7eb;
+      box-shadow: 0 18px 40px rgba(59, 130, 246, 0.95);
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-role {
+      position: relative;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-role span {
+      color: #a5b4fc;
+    }
+
+    .hero-tags {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.4rem;
+      font-size: 0.76rem;
+    }
+
+    .tag {
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.94);
+      color: var(--muted);
+    }
+
+    .hero-orbit {
+      position: absolute;
+      right: -26px;
+      top: 18px;
+      width: 122px;
+      height: 122px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.55);
+      display: grid;
+      place-items: center;
+      font-size: 0.8rem;
+      color: #a5b4fc;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), transparent);
+    }
+
+    .hero-orbit span {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* SECTION HEADERS */
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading h2 {
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+
+    .section-heading p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 30rem;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 2rem;
+    }
+
+    .about-text {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .about-text p + p {
+      margin-top: 0.7rem;
+    }
+
+    .stat-grid {
+      margin-top: 1.1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.7rem;
+      font-size: 0.88rem;
+    }
+
+    .stat-card {
+      padding: 0.55rem 0.75rem;
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--border);
+    }
+
+    .stat-card span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .stat-card strong {
+      font-size: 0.92rem;
+      color: #e5e7eb;
+    }
+
+    .side-card {
+      border-radius: var(--radius-xl);
+      padding: 1.1rem 1.1rem;
+      background: radial-gradient(circle at top left, #020617, #020617);
+      border: 1px solid var(--border);
+      font-size: 0.86rem;
+      color: var(--muted);
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .pill-soft {
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.75rem;
+    }
+
+    /* RESEARCH & TEACHING */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 1.6rem;
+    }
+
+    .card {
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top, #020617, #020617);
+      border: 1px solid var(--border);
+      padding: 1.1rem 1.15rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .card h3 {
+      font-size: 0.98rem;
+      color: #e5e7eb;
+      margin-bottom: 0.45rem;
+    }
+
+    .card ul {
+      margin-top: 0.6rem;
+      padding-left: 1.05rem;
+      display: grid;
+      gap: 0.25rem;
+    }
+
+    .card li {
+      font-size: 0.86rem;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      color: #a5b4fc;
+      margin-bottom: 0.15rem;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.3rem;
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      padding: 1.05rem 1.05rem;
+      background: radial-gradient(circle at top, #020617, #020617);
+      border: 1px solid var(--border);
+      display: grid;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      transition: transform var(--transition), box-shadow var(--transition),
+        border-color var(--transition);
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(129, 140, 248, 0.7);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .project-badge {
+      font-size: 0.72rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(129, 140, 248, 0.7);
+      color: #c7d2fe;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .project-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      color: #a5b4fc;
+      margin-top: 0.3rem;
+    }
+
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.2rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      color: #a5b4fc;
+      font-size: 0.8rem;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 1.6rem;
+      align-items: flex-start;
+    }
+
+    form {
+      display: grid;
+      gap: 0.7rem;
+      font-size: 0.86rem;
+    }
+
+    label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+      display: block;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border-radius: 0.85rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.95);
+      padding: 0.55rem 0.7rem;
+      font-size: 0.86rem;
+      color: var(--text);
+      outline: none;
+      resize: vertical;
+      min-height: 38px;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: rgba(129, 140, 248, 0.9);
+      box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.7);
+    }
+
+    .contact-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 0.5rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .contact-item strong {
+      color: #e5e7eb;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+      margin-top: 3rem;
+      padding: 1.1rem 0 0.9rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .footer-links a {
+      color: #9ca3af;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-card {
+        order: -1;
+      }
+      .about-grid,
+      .grid-2,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-toggle {
+        display: inline-flex;
+      }
+      nav {
+        position: absolute;
+        inset: 100% 0 auto;
+        background: rgba(2, 6, 23, 0.98);
+        border-bottom: 1px solid rgba(30, 64, 175, 0.7);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 180ms ease-out;
+      }
+      nav.open {
+        max-height: 180px;
+      }
+      nav ul {
+        flex-direction: column;
+        padding: 0.7rem 1.5rem 1rem;
+      }
+      main {
+        padding-inline: 1.1rem;
+      }
+      .hero-orbit {
+        opacity: 0.45;
+        transform: scale(0.88);
+        right: -40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-badge">AO</div>
+        <span>Abel&nbsp;Owolabi</span>
+      </div>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" id="navToggle">
+        ☰
+      </button>
+
+      <nav id="nav">
+        <ul>
+          <li><a href="#top">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>Ph.D. in Electrical &amp; Computer Engineering</span>
+        </div>
+
+        <h1 class="hero-title">
+          Abel <span>Owolabi</span>
+        </h1>
+
+        <p class="hero-sub">
+          Ph.D. student in the Department of Electrical and Computer Engineering
+          at the <strong>University of Rochester</strong>, working on
+          superconducting electronics, <strong>dynamic single-flux quantum
+          (DSFQ) logic</strong>, and advanced
+          <strong>beyond-CMOS VLSI</strong> circuits.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="btn-primary"
+            onclick="document.getElementById('research').scrollIntoView({behavior: 'smooth'})">
+            View research focus →
+          </button>
+          <button class="btn-ghost"
+            onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+            Contact
+          </button>
+        </div>
+
+        <div class="hero-meta">
+          <span><strong>Affiliation:</strong> University of Rochester</span>
+          <span><strong>Interests:</strong> SFQ logic, VLSI, cryogenic computing</span>
+          <span><strong>Goal:</strong> Advance secure, energy-efficient computing</span>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <div class="hero-avatar">A</div>
+        <div class="hero-role">
+          Superconducting Logic &amp; <span>VLSI Researcher</span>
+        </div>
+        <p style="position: relative; font-size: 0.9rem; color: var(--muted);">
+          I work on clock-free, self-resetting <strong>DSFQ logic gates</strong>,
+          optimized superconducting adders, and design flows that reduce
+          Josephson junction count while maintaining wide bias margins.
+        </p>
+        <div class="hero-tags">
+          <div class="tag">DSFQ / RSFQ logic</div>
+          <div class="tag">SFQ5ee process</div>
+          <div class="tag">KLayout &amp; PCells</div>
+          <div class="tag">Cadence Virtuoso</div>
+          <div class="tag">MATLAB &amp; Python</div>
+        </div>
+        <div class="hero-orbit">
+          <div>
+            Research • Teaching
+            <br />
+            <span>VLSI &amp; superconducting circuits</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-heading">
+        <h2>About</h2>
+        <p>
+          A snapshot of my academic path, research motivations, and long-term
+          plans for VLSI and superconducting electronics in Nigeria and beyond.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I am a Ph.D. student in Electrical and Computer Engineering at the
+            University of Rochester. My work lies at the intersection of
+            <strong>superconducting logic</strong>, <strong>VLSI design</strong>,
+            and <strong>secure computing</strong>.
+          </p>
+
+          <p>
+            Before Rochester, I studied Computer Engineering at
+            <strong>Ladoke Akintola University of Technology (LAUTECH)</strong>,
+            graduating with First-Class Honors and being recognized as the
+            <strong>Best Graduating Student</strong> in both my department and
+            the Faculty of Engineering and Technology.
+          </p>
+
+          <p>
+            I am passionate about building research capacity in
+            <strong>VLSI circuits and systems</strong> in Nigeria and West
+            Africa. After my Ph.D., I plan to help establish a strong VLSI and
+            superconducting electronics research ecosystem, including a research
+            group at Augustine University in collaboration with IEEE and other
+            partners.
+          </p>
+
+          <div class="stat-grid">
+            <div class="stat-card">
+              <span>Current position</span>
+              <strong>Ph.D. student, ECE — University of Rochester</strong>
+            </div>
+            <div class="stat-card">
+              <span>Background</span>
+              <strong>First-Class B.Tech, Computer Engineering (LAUTECH)</strong>
+            </div>
+            <div class="stat-card">
+              <span>Research direction</span>
+              <strong>Beyond-CMOS, SFQ logic, secure VLSI</strong>
+            </div>
+            <div class="stat-card">
+              <span>Future goal</span>
+              <strong>Lead VLSI/SFQ research in Nigeria &amp; West Africa</strong>
+            </div>
+          </div>
+        </div>
+
+        <aside class="side-card">
+          <div>
+            <strong>Skills &amp; tools</strong>
+          </div>
+          <div class="pill-row">
+            <span class="pill-soft">Superconducting logic (RSFQ / DSFQ)</span>
+            <span class="pill-soft">KLayout (GDS-II, PCells)</span>
+            <span class="pill-soft">Cadence Virtuoso</span>
+            <span class="pill-soft">InductEx</span>
+            <span class="pill-soft">MATLAB</span>
+            <span class="pill-soft">Python (EDA scripts)</span>
+          </div>
+
+          <div>
+            <strong>Areas of interest</strong>
+          </div>
+          <p>
+            Clock-free SFQ logic, high-throughput adders, side-channel-aware
+            VLSI, cryogenic computing, and design automation for
+            superconducting circuits.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research">
+      <div class="section-heading">
+        <h2>Research</h2>
+        <p>
+          I work on data-driven superconducting logic and VLSI architectures
+          that improve energy efficiency, scalability, and security for future
+          computing systems.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <div class="label">Current focus</div>
+          <h3>Dynamic Single-Flux Quantum (DSFQ) Logic</h3>
+          <p>
+            My research centers on designing and optimizing
+            <strong>clock-free, self-resetting DSFQ logic gates</strong> and
+            arithmetic units using the MIT-LL SFQ5ee process.
+          </p>
+          <ul>
+            <li>Clock-free XOR and AND gates with data-driven triggering.</li>
+            <li>4-bit all-dynamic SFQ carry-lookahead adder architectures.</li>
+            <li>Path balancing, wave-pipelining, and bias-margin optimization.</li>
+            <li>Reducing Josephson junction count while preserving throughput.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="label">Broader interests</div>
+          <h3>Secure &amp; Energy-Efficient VLSI</h3>
+          <p>
+            Beyond SFQ logic, I am interested in <strong>side-channel attacks in
+            VLSI circuits</strong> and secure integrated-circuit design for
+            computer systems.
+          </p>
+          <ul>
+            <li>Power-analysis-based side-channel vulnerabilities in ICs.</li>
+            <li>VLSI architectures that reduce leakage and attack surfaces.</li>
+            <li>Integration of SFQ-based subsystems into larger computing flows.</li>
+            <li>Research translation to curricula and labs in Nigerian universities.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- TEACHING -->
+    <section id="teaching">
+      <div class="section-heading">
+        <h2>Teaching &amp; Mentoring</h2>
+        <p>
+          Teaching is a core part of my academic journey — from undergraduate
+          labs in Nigeria to graduate-level courses in Rochester.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <div class="label">At the University of Rochester</div>
+          <h3>Teaching Assistant — Electrical &amp; Computer Engineering</h3>
+          <ul>
+            <li>Support for core undergraduate and graduate ECE courses.</li>
+            <li>Laboratory supervision and guidance on measurement setups.</li>
+            <li>
+              Help students build strong foundations in electromagnetics,
+              circuits, and computing.
+            </li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="label">Earlier experience</div>
+          <h3>Graduate Teaching Assistant (Nigeria)</h3>
+          <p>
+            I was retained after graduation as a Graduate Teaching Assistant,
+            contributing to teaching and mentoring in Computer Engineering and
+            related courses.
+          </p>
+          <ul>
+            <li>Prepared and delivered lab sessions and tutorials.</li>
+            <li>Helped students bridge theory and hands-on implementation.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-heading">
+        <h2>Projects</h2>
+        <p>
+          Selected design and research projects spanning superconducting logic,
+          VLSI, and electronic systems. Some are ongoing and under publication.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-badge">Superconducting logic</div>
+          <h3 class="project-title">
+            Clock-Free DSFQ XOR Gate with Self-Resetting Loops
+          </h3>
+          <p>
+            Design and optimization of a dynamic SFQ XOR gate that operates
+            without a global clock, using self-resetting loops and carefully
+            tuned bias margins. Implemented and simulated in Cadence using the
+            MIT-LL SFQ5ee process design kit.
+          </p>
+          <div class="project-tags">
+            <span>#DSFQ</span>
+            <span>#SFQ5ee</span>
+            <span>#Cadence</span>
+            <span>#BiasMargin</span>
+          </div>
+          <div class="project-footer">
+            <span>Research in progress</span>
+            <span class="project-link">Details on request →</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-badge">Arithmetic</div>
+          <h3 class="project-title">
+            4-Bit Dynamic SFQ Carry-Lookahead Adder
+          </h3>
+          <p>
+            An all-dynamic SFQ CLA architecture targeting high throughput and
+            reduced junction count, evaluated against existing RSFQ / CMOS
+            baselines using benchmark circuits such as KSA4 and ISCAS-style
+            structures.
+          </p>
+          <div class="project-tags">
+            <span>#SFQ</span>
+            <span>#CLA</span>
+            <span>#HighThroughput</span>
+          </div>
+          <div class="project-footer">
+            <span>Architecture &amp; simulation</span>
+            <span class="project-link">More coming soon →</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-badge">EDA / Layout</div>
+          <h3 class="project-title">
+            Parameterized Josephson Junction &amp; Resistor PCells
+          </h3>
+          <p>
+            Custom KLayout PCells for Josephson junctions and bias/shunt
+            resistors, encoding foundry design rules, sheet-resistance models,
+            and automated geometry generation for SFQ5ee-style processes.
+          </p>
+          <div class="project-tags">
+            <span>#KLayout</span>
+            <span>#PCells</span>
+            <span>#GDSII</span>
+            <span>#Python</span>
+          </div>
+          <div class="project-footer">
+            <span>Tooling</span>
+            <span class="project-link">Code sharable on request →</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-heading">
+        <h2>Contact</h2>
+        <p>
+          For research collaboration, questions about superconducting logic or
+          VLSI, or academic opportunities, feel free to reach out.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="contact-grid">
+          <form onsubmit="handleSubmit(event)">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" type="text" placeholder="Your name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+            <div>
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                rows="4"
+                placeholder="Write your message here..."
+                required
+              ></textarea>
+            </div>
+            <button class="btn-primary" type="submit">
+              Send message
+            </button>
+            <p class="contact-note">
+              This demo form shows a confirmation message in the browser.
+              You can later connect it to a real backend or a service like
+              Formspree.
+            </p>
+          </form>
+
+          <div class="contact-list">
+            <div class="contact-item">
+              <strong>Email:</strong>
+              <br />
+              <!-- TODO: replace with your real email -->
+              <span><a href="mailto:abel.owolabi@example.com">
+                abel.owolabi@example.com
+              </a></span>
+            </div>
+            <div class="contact-item">
+              <strong>GitHub:</strong>
+              <br />
+              <!-- TODO: replace with your real GitHub -->
+              <span><a href="https://github.com/your-github-username" target="_blank">
+                github.com/your-github-username
+              </a></span>
+            </div>
+            <div class="contact-item">
+              <strong>Google Scholar / LinkedIn:</strong>
+              <br />
+              Add links here once your profiles are ready.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>© <span id="year"></span> Abel Owolabi. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById("navToggle");
+    const nav = document.getElementById("nav");
+
+    navToggle.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
+
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+      });
+    });
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Demo contact form handler
+    function handleSubmit(event) {
+      event.preventDefault();
+      alert(
+        "Thank you for your message! You can later connect this form to a real email service."
+      );
+      event.target.reset();
+    }
+  </script>
+</body>
+</html>
